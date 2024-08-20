@@ -17,3 +17,7 @@ jobs:
       
     - run: |
         nix build .#packages.aarch64-linux.sdcard
+    - uses: actions/upload-artifact@v4
+      with:
+        name: my-artifact
+        path: result/
