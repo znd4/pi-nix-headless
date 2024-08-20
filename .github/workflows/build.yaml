@@ -13,11 +13,14 @@ jobs:
         nix_path: nixpkgs=channel:nixos-unstable
         extra_nix_config: |
           extra-platforms = aarch64-linux
+    - uses: cachix/cachix-action@v14
+      with:
+        name: rpi-headless
+        # If you chose API tokens for write access OR if you have a private cache
+        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     - uses: docker/setup-qemu-action@v1
-      
     - run: |
         nix build .#packages.aarch64-linux.sdcard
     - uses: actions/upload-artifact@v4
       with:
-        name: my-artifact
-        path: result/
+        path: result/sd-image/*.img.zst
