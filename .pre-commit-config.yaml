@@ -1,3 +1,6 @@
+ci:
+  skip:
+    - nix-format
 repos:
   - repo: local
     hooks:
